@@ -470,11 +470,11 @@
     // =========================================
 
     const LOOKUP_URL = "https://script.google.com/macros/s/AKfycbzOp-9gQ9xMZtb7GxrLcWW_Nc5yrBu7KbmqDVYlI3s1GQ3wJhmOCfKyaoKgvTfttI2v/exec";
-    const JOTFORM_BASE_URL = "https://form.jotform.com/261148940124352";
+    const JOTFORM_BASE_URL = "https://form.jotform.com/261090250858356";
 
     const EVENT_LOGO = "https://github.com/jsamartzis-png/logos/blob/main/logo_EntryFlow_removebg-preview.png?raw=true";
     const EVENT_BACKGROUND = "background.jpg";
-    const EVENT_TITLE = "ATHENS TROPHY INSHORE";
+    const EVENT_TITLE = "ATHENS TROPHY COASTAL";
 
     const EVENT_NOTES = [
   "Με τη χρήση αυτής της εφαρμογής, μπορείτε εύκολα να υποβάλετε τα απαραίτητα έγγραφα και να ολοκληρώσετε την πληρωμή του παραβόλου (όλα σε ένα σημείο).",
@@ -611,7 +611,7 @@ function buildPrefillUrl(data) {
 
   params.set(fieldNames.aph, formatForJotformNumber(data.aph_initial));
   params.set(fieldNames.cert_date, data.certdate_last || "");
-  params.set(fieldNames.cert_type, data.initial_category || "");
+  params.set(fieldNames.cert_type, data.initial_category || data.Initial_Category || "");
   params.set(fieldNames.saronic_cat, formatForJotformNumber(data.gph));
   params.set(fieldNames.aph_club, formatForJotformNumber(data.aph_club));
   params.set(fieldNames.aph_intl, formatForJotformNumber(data.aph_intl));
@@ -650,9 +650,10 @@ function buildPrefillUrl(data) {
           return;
         }
 
-        lastFoundData = json.data || {};
-        showResult(lastFoundData);
-        setStatus("Η αναζήτηση ολοκληρώθηκε.");
+      lastFoundData = json.data || {};
+console.log("DATA ΠΟΥ ΗΡΘΑΝ:", lastFoundData);
+showResult(lastFoundData);
+setStatus("Η αναζήτηση ολοκληρώθηκε.");
       } catch (err) {
         console.error(err);
         setStatus("Σφάλμα επικοινωνίας με το σύστημα αναζήτησης.", true, false, true);
